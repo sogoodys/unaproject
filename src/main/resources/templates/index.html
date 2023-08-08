@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>paging</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header_footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="shortcut icon" type="image/icon" sizes="32*32" th:href="@{/images/header/logoSample2.png}"/>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script th:src="@{/js/header_footer.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+</head>
+<body>
+
+<!-------------------- [S] #wrap -------------------->
+<div id="wrap">
+
+    <!---------- [S] header ---------->
+    <header>
+        <div class="home">
+            <h1>
+                <a href="#">우나</a>
+            </h1>
+            <div class="logo">
+                <a href="#">
+                    <img class="main_logo_img" th:src="@{/images/header/logoSample2.png}" alt="logo">
+                </a>
+            </div>
+        </div>
+        <nav>
+            <ul class="tMenu">
+                <li class="menu menu1">
+                    <a href="#" class="hover_a hover_a1">우주마당</a>
+                    <ul class="subMenu subMenu1">
+                        <li class="smenu"><a href="#">알아봐요 탐험마당</a></li>
+                        <li class="smenu"><a href="#">신기해요 소식마당</a></li>
+                    </ul>
+                </li>
+                <li id="top_menu2" class="menu menu2">
+                    <a href="#" class="hover_a hover_a2" >참여마당</a>
+                    <ul class="subMenu subMenu2">
+                        <li class="smenu"><a href="#">두근두근 추첨마당</a></li>
+                        <li class="smenu"><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+                        <li class="smenu"><a href="#">복작복작 놀이마당</a></li>
+                    </ul>
+                </li>
+                <li class="menu menu3">
+                    <a href="#" class="hover_a hover_a3">알림마당</a>
+                    <ul class="subMenu subMenu3">
+                        <li class="smenu"><a href="#">여기주목 공지사항</a></li>
+                        <li class="smenu"><a href="#">반짝반짝 우리소개</a></li>
+                        <li class="smenu"><a href="#">공유해요 자료마당</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="login_area">
+            <ul>
+                <li class="srch_btn"><a href="#"><img class="srch_img" th:src="@{/images/search.png}" alt="search"></a></li>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+        </div>
+        <div id="header_search">
+            <form action="#" method="post" name="search">
+                <fieldset>
+                    <legend>검색영역</legend>
+                    <label for="srch" class="hidden">검색</label>
+                    <input type="search" id="srch" placeholder="검색어를 입력하세요">
+                    <button type="submit" class="srch_btn"><img th:src="@{/images/search.png}" alt="search"></button>
+                </fieldset>
+            </form>
+        </div>
+    </header>
+    <!---------- [E] header ---------->
+
+    <!---------- [S] #container ---------->
+    <div id="dep_menu_wrap">
+        <div class="first_menu_wrap menu_wrap">
+            <div class="hexagon hexagon_hover hexagon1">나의천체기록</div>
+            <div class="hexagon hexagon2"><a href="#" class="hexagon_a"></a></div>
+        </div>
+        <div class="second_menu_wrap menu_wrap">
+            <div class="hexagon hexagon3"></div>
+            <div class="hexagon hexagon_title">모임마당</div> <!-- 타이틀은 hover시 효과없음 -->
+            <div class="hexagon hexagon_hover hexagon5" onclick="pagingReq()">우리같이가요!</div>
+        </div>
+        <div class="third_menu_wrap menu_wrap">
+            <div class="hexagon hexagon_hover hexagon6">중고장터</div>
+            <div class="hexagon hexagon7"></div>
+        </div>
+    </div>
+
+    <!---------- [E] container ---------->
+    <!---------- [S] footer ---------->
+    <footer>
+        <div id="footer_link">
+            <ul>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">우리소개</a></li>
+                <li><a href="#">자료마당</a></li>
+                <li><a href="#">체험마당</a></li>
+            </ul>
+        </div>
+        <p class="copyright">
+            &copy; 2023 TeamSPACE. ALL RIGHTS RESERVED.
+        </p>
+    </footer>
+    <!---------- [E] footer ---------->
+</div>
+<!-------------------- [E] #wrap -------------------->
+
+</body>
+    <script>
+        // function saveReq() {
+        //
+        // }
+        const saveReq = () => {
+            location.href="/board/save";
+        }
+        const ListReq = () => {
+            location.href="/board/";
+        }
+
+        const pagingReq = () => {
+            location.href="/board/paging";
+        }
+
+    </script>
+</html>

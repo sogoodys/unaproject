@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>paging</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header_footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bookmark.css}"/>
+    <link rel="stylesheet" th:href="@{/css/paging.css}"/>
+    <link rel="shortcut icon" type="image/icon" sizes="32*32" th:href="@{/images/header/logoSample2.png}"/>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script th:src="@{/js/header_footer.js}"></script>
+    <script th:src="@{/js/bookmark.js}"></script>
+</head>
+<body>
+
+<!-------------------- [S] #wrap -------------------->
+<div id="wrap">
+    <!-- bookmark_menu -->
+    <div id="bookmark_div_wrap">
+        <ul id="bookmark_ul">
+            <li class="bookmark_li bk_title">참여마당</li>
+            <li class="bookmark_li bk_li_1"><a href="#">두근두근 추첨마당</a></li>
+            <li class="bookmark_li bk_li_2"><a href="#">하루하루 체험마당</a></li>
+            <li class="bookmark_li bk_li_3" ><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+            <li class="bookmark_li bk_li_4"><a href="#">복작복작 놀이마당</a></li>
+        </ul>
+        <!-- <div id="bookmark_sub_title"><span>참여마당</span></div> -->
+    </div>
+    <div id="go_up_div">
+        <img th:src="@{/images/go_up.png}" alt="위로이동" class="go_up_img"/>
+    </div>
+    <!---------- [S] header ---------->
+    <header>
+        <div class="home">
+            <h1>
+                <a href="#">우나</a>
+            </h1>
+            <div class="logo">
+                <a href="#">
+                    <img class="main_logo_img" th:src="@{/images/header/logoSample2.png}" alt="logo">
+                </a>
+            </div>
+        </div>
+        <nav>
+            <ul class="tMenu">
+                <li class="menu menu1">
+                    <a href="#" class="hover_a hover_a1">우주마당</a>
+                    <ul class="subMenu subMenu1">
+                        <li class="smenu"><a href="#">알아봐요 탐험마당</a></li>
+                        <li class="smenu"><a href="#">신기해요 소식마당</a></li>
+                    </ul>
+                </li>
+                <li id="top_menu2" class="menu menu2">
+                    <a href="#" class="hover_a hover_a2" >참여마당</a>
+                    <ul class="subMenu subMenu2">
+                        <li class="smenu"><a href="#">두근두근 추첨마당</a></li>
+                        <li class="smenu"><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+                        <li class="smenu"><a href="#">복작복작 놀이마당</a></li>
+                    </ul>
+                </li>
+                <li class="menu menu3">
+                    <a href="#" class="hover_a hover_a3">알림마당</a>
+                    <ul class="subMenu subMenu3">
+                        <li class="smenu"><a href="#">여기주목 공지사항</a></li>
+                        <li class="smenu"><a href="#">반짝반짝 우리소개</a></li>
+                        <li class="smenu"><a href="#">공유해요 자료마당</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="login_area">
+            <ul>
+                <li class="srch_btn"><a href="#"><img class="srch_img" th:src="@{/images/search.png}" alt="search"></a></li>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+        </div>
+        <div id="header_search">
+            <form action="#" method="post" name="search">
+                <fieldset>
+                    <legend>검색영역</legend>
+                    <label for="srch" class="hidden">검색</label>
+                    <input type="search" id="srch" placeholder="검색어를 입력하세요">
+                    <button type="submit" class="srch_btn"><img th:src="@{/images/search.png}" alt="search"></button>
+                </fieldset>
+            </form>
+        </div>
+    </header>
+    <!---------- [E] header ---------->
+    <!-- h2 title and BG img div -->
+    <div id="title_bg_wrap" th:style=" 'background-image: url(/images/bg_sample3.jpg)' ">
+        <h2 id="sub_page_h2">모여봐요 모임마당</h2>
+    </div>
+    <!---------- [S] #container ---------->
+<div class="board_list_wrap">
+    <div class="board_table_wrap">
+    <table class="board_list">
+    <caption>게시판 목록</caption>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>작성일</th>
+        <th>조회</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="board: ${boardList}">
+        <td th:text="${board.id}"></td>
+        <!-- (page=${boardList.number + 1}) : 상세 조회를 할 때 페이지 번호를 가져가서 보여줌-->
+        <td><a th:href="@{/board/{id}(page=${boardList.number + 1},id=${board.id})}" th:text="${board.boardTitle}" class="tit"></a></td>
+        <td th:text="${board.boardWriter}"></td>
+        <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${board.boardHits}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="board_btn_wrap">
+<button onclick="saveReq()" class="board_write_btn">글쓰기</button>
+</div>
+
+
+<div class="paging">
+<!-- 첫번째 페이지로 이동 -->
+<!-- /board/paging?page=1 -->
+<a th:href="@{/board/paging(page=1)}">First</a>
+<!-- 이전 링크 활성화 비활성화 -->
+<!-- boardList.getNumber() 사용자:2페이지 getNumber()=1 -->
+    <a th:if="${boardList.first}" href="#">prev</a>
+    <a th:if="${!boardList.first}" th:href="@{/board/paging(page=${boardList.number})}">prev</a>
+
+<!-- 페이지 번호 링크(현재 페이지는 숫자만)
+        for(int page=startPage; page<=endPage; page++)-->
+<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+<!-- 현재페이지는 링크 없이 숫자만 -->
+    <span th:if="${page == boardList.number + 1}" th:text="${page}" th:style="'font-weight: bold;'"></span>
+    <!-- 현재페이지 번호가 아닌 다른 페이지번호에는 링크를 보여줌 -->
+    <span th:unless="${page == boardList.number + 1}">
+        <a th:href="@{/board/paging(page=${page})}" th:text="${page}"></a>
+    </span>
+</span>
+
+<!-- 다음 링크 활성화 비활성화
+    사용자: 2페이지, getNumber: 1, 3페이지-->
+    <a th:if="${boardList.last}" href="#">next</a>
+    <a th:if="${!boardList.last}" th:href="@{/board/paging(page=${boardList.number + 2})}">next</a>
+<!-- 마지막 페이지로 이동 -->
+<a th:href="@{/board/paging(page=${boardList.totalPages})}">Last</a>
+</div>
+
+    </div>
+</div>
+
+    <!---------- [E] container ---------->
+    <!---------- [S] footer ---------->
+    <footer>
+        <div id="footer_link">
+            <ul>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">우리소개</a></li>
+                <li><a href="#">자료마당</a></li>
+                <li><a href="#">체험마당</a></li>
+            </ul>
+        </div>
+        <p class="copyright">
+            &copy; 2023 TeamSPACE. ALL RIGHTS RESERVED.
+        </p>
+    </footer>
+    <!---------- [E] footer ---------->
+</div>
+<!-------------------- [E] #wrap -------------------->
+
+</body>
+<script>
+    const saveReq = () => {
+        location.href = "/board/save";
+    }
+
+
+</script>
+</html>

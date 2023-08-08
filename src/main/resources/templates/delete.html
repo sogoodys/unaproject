@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>delete</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/delete.css}"/>
+    <link rel="shortcut icon" type="image/icon" sizes="32*32" th:href="@{/images/header/logoSample2.png}"/>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+</head>
+<body>
+<form action="/board/delete" method="post" name="deleteForm">
+    <input type="hidden" name="postId" th:value="${postId}">
+    <input type="password" placeholder="비밀번호 입력" name="boardPass" id="boardPass" class="boardPass">
+    <input type="button" value="삭제" class="on" onclick="boardDelete()">
+    </form>
+
+    <button onclick="listReq()" class="view_list">글목록</button>
+
+</body>
+<script th:inline="javascript">
+    const boardDelete = () => {
+        const pass = [[${boardDelete.boardPass}]]; <!-- db에서 가져온 기존 비밀번호-->
+        const inputPass = document.getElementById("boardPass").value; <!-- 사용자가 입력한 비밀번호-->
+        if (pass == inputPass) {
+            document.deleteForm.submit();
+        } else {
+            alert("비밀번호가 일치하지 않습니다!");
+        }
+    }
+
+    const listReq = () => {
+        console.log("목록 요청");
+        const page = [[${page}]];
+        location.href = "/board/paging";
+    }
+
+
+
+
+</script>
+</html>

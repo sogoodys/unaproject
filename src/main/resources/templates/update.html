@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>update</title>
+  <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+  <link rel="stylesheet" th:href="@{/css/header_footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bookmark.css}"/>
+  <link rel="stylesheet" th:href="@{/css/update.css}"/>
+  <link rel="shortcut icon" type="image/icon" sizes="32*32" th:href="@{/images/header/logoSample2.png}"/>
+  <!-- jquery cdn -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script th:src="@{/js/header_footer.js}"></script>
+  <script th:src="@{/js/bookmark.js}"></script>
+</head>
+<body>
+
+<!-------------------- [S] #wrap -------------------->
+<div id="wrap">
+  <!-- bookmark_menu -->
+  <div id="bookmark_div_wrap">
+    <ul id="bookmark_ul">
+      <li class="bookmark_li bk_title">참여마당</li>
+      <li class="bookmark_li bk_li_1"><a href="#">두근두근 추첨마당</a></li>
+      <li class="bookmark_li bk_li_2"><a href="#">하루하루 체험마당</a></li>
+      <li class="bookmark_li bk_li_3"><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+      <li class="bookmark_li bk_li_4"><a href="#">복작복작 놀이마당</a></li>
+    </ul>
+    <!-- <div id="bookmark_sub_title"><span>참여마당</span></div> -->
+  </div>
+  <div id="go_up_div">
+    <img th:src="@{/images/go_up.png}" alt="위로이동" class="go_up_img"/>
+  </div>
+  <!---------- [S] header ---------->
+  <header>
+    <div class="home">
+      <h1>
+        <a href="#">우나</a>
+      </h1>
+      <div class="logo">
+        <a href="#">
+          <img class="main_logo_img" th:src="@{/images/header/logoSample2.png}" alt="logo">
+        </a>
+      </div>
+    </div>
+    <nav>
+      <ul class="tMenu">
+        <li class="menu menu1">
+          <a href="#" class="hover_a hover_a1">우주마당</a>
+          <ul class="subMenu subMenu1">
+            <li class="smenu"><a href="#">알아봐요 탐험마당</a></li>
+            <li class="smenu"><a href="#">신기해요 소식마당</a></li>
+          </ul>
+        </li>
+        <li id="top_menu2" class="menu menu2">
+          <a href="#" class="hover_a hover_a2" >참여마당</a>
+          <ul class="subMenu subMenu2">
+            <li class="smenu"><a href="#">두근두근 추첨마당</a></li>
+            <li class="smenu"><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+            <li class="smenu"><a href="#">복작복작 놀이마당</a></li>
+          </ul>
+        </li>
+        <li class="menu menu3">
+          <a href="#" class="hover_a hover_a3">알림마당</a>
+          <ul class="subMenu subMenu3">
+            <li class="smenu"><a href="#">여기주목 공지사항</a></li>
+            <li class="smenu"><a href="#">반짝반짝 우리소개</a></li>
+            <li class="smenu"><a href="#">공유해요 자료마당</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div id="login_area">
+      <ul>
+        <li class="srch_btn"><a href="#"><img class="srch_img" th:src="@{/images/search.png}" alt="search"></a></li>
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">회원가입</a></li>
+      </ul>
+    </div>
+    <div id="header_search">
+      <form action="#" method="post" name="search">
+        <fieldset>
+          <legend>검색영역</legend>
+          <label for="srch" class="hidden">검색</label>
+          <input type="search" id="srch" placeholder="검색어를 입력하세요">
+          <button type="submit" class="srch_btn"><img th:src="@{/images/search.png}" alt="search"></button>
+        </fieldset>
+      </form>
+    </div>
+  </header>
+  <!---------- [E] header ---------->
+  <!-- h2 title and BG img div -->
+  <div id="title_bg_wrap" th:style=" 'background-image: url(/images/bg_sample3.jpg)' ">
+    <h2 id="sub_page_h2">모여봐요 모임마당</h2>
+  </div>
+  <!---------- [S] #container ---------->
+
+  <div class="board_wrap">
+
+    <div class="board_write_wrap">
+      <form action="/board/update" method="post" name="updateForm">
+        <div class="board_write">
+          <input type="hidden" name="id" th:value="${boardUpdate.id}">
+          <div class="title">
+            <dl>
+              <dt>제목</dt>
+              <dd><input type="text" placeholder="제목 입력" name="boardTitle" th:value="${boardUpdate.boardTitle}"></dd>
+            </dl>
+          </div>
+          <div class="info">
+            <dl>
+              <dt>글쓴이</dt>
+              <dd><input type="text" placeholder="글쓴이 입력" name="boardWriter" th:value="${boardUpdate.boardWriter}" readonly></dd>
+            </dl>
+            <dl>
+              <dt>비밀번호</dt>
+              <dd><input type="password" placeholder="비밀번호 입력" name="boardPass" id="boardPass"></dd>
+            </dl>
+          </div>
+          <div class="cont">
+                    <textarea name="boardContents" placeholder="내용 입력" cols="30" rows="10" th:text="${boardUpdate.boardContents}" spellcheck="false">
+                    </textarea>
+          </div>
+          <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
+        </div>
+        <div class="bt_wrap">
+          <input type="button" value="글수정" onclick="boardUpdate()" class="on" th:style="'cursor : pointer;'">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!---------- [E] container ---------->
+  <!---------- [S] footer ---------->
+  <footer>
+    <div id="footer_link">
+      <ul>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">우리소개</a></li>
+        <li><a href="#">자료마당</a></li>
+        <li><a href="#">체험마당</a></li>
+      </ul>
+    </div>
+    <p class="copyright">
+      &copy; 2023 TeamSPACE. ALL RIGHTS RESERVED.
+    </p>
+  </footer>
+  <!---------- [E] footer ---------->
+</div>
+<!-------------------- [E] #wrap -------------------->
+
+</body>
+<script th:inline="javascript">
+  const boardUpdate = () => {
+    const pass = [[${boardUpdate.boardPass}]]; <!-- db에서 가져온 기존 비밀번호-->
+    const inputPass = document.getElementById("boardPass").value; <!-- 사용자가 입력한 비밀번호-->
+    if (pass == inputPass) {
+      document.updateForm.submit();
+    } else {
+      alert("비밀번호가 일치하지 않습니다!");
+    }
+  }
+</script>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>detail</title>
+  <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+  <link rel="stylesheet" th:href="@{/css/header_footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bookmark.css}"/>
+  <link rel="stylesheet" th:href="@{/css/detail.css}"/>
+  <link rel="shortcut icon" type="image/icon" sizes="32*32" th:href="@{/images/header/logoSample2.png}"/>
+  <!-- jquery cdn -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script th:src="@{/js/header_footer.js}"></script>
+  <script th:src="@{/js/bookmark.js}"></script>
+</head>
+<body>
+
+<!-------------------- [S] #wrap -------------------->
+<div id="wrap">
+  <!-- bookmark_menu -->
+  <div id="bookmark_div_wrap">
+    <ul id="bookmark_ul">
+      <li class="bookmark_li bk_title">참여마당</li>
+      <li class="bookmark_li bk_li_1"><a href="#">두근두근 추첨마당</a></li>
+      <li class="bookmark_li bk_li_2"><a href="#">하루하루 체험마당</a></li>
+      <li class="bookmark_li bk_li_3"><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+      <li class="bookmark_li bk_li_4"><a href="#">복작복작 놀이마당</a></li>
+    </ul>
+    <!-- <div id="bookmark_sub_title"><span>참여마당</span></div> -->
+  </div>
+  <div id="go_up_div">
+    <img th:src="@{/images/go_up.png}" alt="위로이동" class="go_up_img"/>
+  </div>
+  <!---------- [S] header ---------->
+  <header>
+    <div class="home">
+      <h1>
+        <a href="#">우나</a>
+      </h1>
+      <div class="logo">
+        <a href="#">
+          <img class="main_logo_img" th:src="@{/images/header/logoSample2.png}" alt="logo">
+        </a>
+      </div>
+    </div>
+    <nav>
+      <ul class="tMenu">
+        <li class="menu menu1">
+          <a href="#" class="hover_a hover_a1">우주마당</a>
+          <ul class="subMenu subMenu1">
+            <li class="smenu"><a href="#">알아봐요 탐험마당</a></li>
+            <li class="smenu"><a href="#">신기해요 소식마당</a></li>
+          </ul>
+        </li>
+        <li id="top_menu2" class="menu menu2">
+          <a href="#" class="hover_a hover_a2" >참여마당</a>
+          <ul class="subMenu subMenu2">
+            <li class="smenu"><a href="#">두근두근 추첨마당</a></li>
+            <li class="smenu"><a href="http://localhost:8082/">모여봐요 모임마당</a></li>
+            <li class="smenu"><a href="#">복작복작 놀이마당</a></li>
+          </ul>
+        </li>
+        <li class="menu menu3">
+          <a href="#" class="hover_a hover_a3">알림마당</a>
+          <ul class="subMenu subMenu3">
+            <li class="smenu"><a href="#">여기주목 공지사항</a></li>
+            <li class="smenu"><a href="#">반짝반짝 우리소개</a></li>
+            <li class="smenu"><a href="#">공유해요 자료마당</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div id="login_area">
+      <ul>
+        <li class="srch_btn"><a href="#"><img class="srch_img" th:src="@{/images/search.png}" alt="search"></a></li>
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">회원가입</a></li>
+      </ul>
+    </div>
+    <div id="header_search">
+      <form action="#" method="post" name="search">
+        <fieldset>
+          <legend>검색영역</legend>
+          <label for="srch" class="hidden">검색</label>
+          <input type="search" id="srch" placeholder="검색어를 입력하세요">
+          <button type="submit" class="srch_btn"><img th:src="@{/images/search.png}" alt="search"></button>
+        </fieldset>
+      </form>
+    </div>
+  </header>
+  <!---------- [E] header ---------->
+  <!-- h2 title and BG img div -->
+  <div id="title_bg_wrap" th:style=" 'background-image: url(/images/bg_sample3.jpg)' ">
+    <h2 id="sub_page_h2">모여봐요 모임마당</h2>
+  </div>
+  <!---------- [S] #container ---------->
+
+  <div class="view_wrap">
+    <ul class="view_detail">
+      <li class="view_title" th:text="${board.boardTitle}">
+
+      </li>
+      <li class="view_info">
+        <ul class="view_info_detail">
+          <li class="view_num">
+            <span class="point">글번호</span>
+            <span th:text="${board.id}"></span>
+          </li>
+          <li class="writer">
+            <span class="point">글쓴이</span>
+            <span th:text="${board.boardWriter}"></span>
+          </li>
+          <li class="write_date">
+            <span class="point">작성일</span>
+            <span th:text="${board.boardCreatedTime}"></span>
+          </li>
+          <li class="view_count">
+            <span class="point">조회수</span>
+            <span th:text="${board.boardHits}"></span>
+          </li>
+        </ul>
+      </li>
+      <li class="view_content" >
+            <P th:text="${board.boardContents}"></P>
+      </li>
+
+      <li class="view_btn_wrap">
+        <button onclick="updateReq()" class="view_modify">수정</button>
+        <button onclick="deleteReq()" class="view_delete">삭제</button>
+        <button onclick="listReq()" class="view_list">글목록</button>
+      </li>
+    </ul>
+  </div>
+
+  <!---------- [E] container ---------->
+  <!---------- [S] footer ---------->
+  <footer>
+    <div id="footer_link">
+      <ul>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">우리소개</a></li>
+        <li><a href="#">자료마당</a></li>
+        <li><a href="#">체험마당</a></li>
+      </ul>
+    </div>
+    <p class="copyright">
+      &copy; 2023 TeamSPACE. ALL RIGHTS RESERVED.
+    </p>
+  </footer>
+  <!---------- [E] footer ---------->
+</div>
+<!-------------------- [E] #wrap -------------------->
+
+
+</body>
+<script th:inline="javascript">
+  const listReq = () => {
+    console.log("목록 요청");
+    const page = [[${page}]];
+    location.href = "/board/paging?page="+page;
+  }
+  const updateReq = () => {
+    console.log("수정 요청");
+    const id = [[${board.id}]];
+    location.href = "/board/update/" + id;
+  }
+
+  const deleteReq = () => {
+    console.log("삭제 요청");
+    const id = [[${board.id}]];
+    location.href = "/board/delete/" + id;
+  }
+</script>
+</html>

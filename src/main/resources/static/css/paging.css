@@ -1,0 +1,79 @@
+table {
+    border-collapse: collapse;
+
+}
+
+caption {
+    text-indent: -10000px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_list_wrap {
+    position: relative;
+    width: 100%;
+    min-width: 1100px;
+    margin-top: 35px;
+}
+
+.board_table_wrap{
+    position: relative;
+    width: 65%;
+    margin: 0 auto;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid #898282;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th{
+    font-weight: bold;
+}
+
+.board_list th,
+.board_list td {
+    padding: 20px;
+    font-size: 20px;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.paging {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.board_btn_wrap {
+    text-align: right;
+    margin-top: 18px;
+    cursor: pointer;
+}
+
+.board_write_btn {
+    padding: 5px;
+    border: 1px solid #000;
+    background-color: #000;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 15px;
+    cursor: pointer;
+}
