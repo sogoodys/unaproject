@@ -73,19 +73,12 @@ public class BoardController {
 //      return "redirect:/board/" + boardDTO.getId(); 조회수가 같이 반영되서 사용x
     }
 
-//    //게시글 삭제
-//    @GetMapping("/delete/{id}")
-//    public String delete(@PathVariable Long id){
-//        boardService.delete(id);
-//        return "redirect:/board/paging";
-//    }
 
     //게시글 삭제
     @GetMapping("/delete/{id}")
     public String deleteForm(@PathVariable Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardDelete", boardDTO);
-        // Add the post ID as a model attribute to be used in the form
         model.addAttribute("postId", id);
         return "delete";
     }
